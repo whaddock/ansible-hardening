@@ -1,0 +1,11 @@
+all:
+  vars:
+    ansible_ssh_user: ceph-admin
+#    ansible_become: true
+    ansible_become_method: sudo
+  children:
+    localhost:
+      hosts:
+        ansible.local:
+          connection: local
+          become: yes
