@@ -1,0 +1,821 @@
+ceph-admin@ansible:~/ceph-stig$ ansible-playbook -i hosts.yml ansible-hardening.yml --limit=mon1.local
+
+PLAY [Harden all systems] ************************************************************************************************************************************
+
+TASK [ansible-hardening : Gather variables for each operating system] ****************************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.078)       0:00:00.078 ******* 
+ok: [mon1.local] => (item=/home/ceph-admin/ceph-stig/ansible-hardening/vars/debian.yml)
+
+TASK [ansible-hardening : Check for check/audit mode] ********************************************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.043)       0:00:00.121 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check to see if we are booting with EFI or UEFI] ***********************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.209)       0:00:00.330 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Set facts] *************************************************************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.031)       0:00:00.362 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check if grub is present on the remote node] ***************************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.028)       0:00:00.391 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Create temporary directory to hold any temporary files] ****************************************************************************
+Wednesday 07 April 2021  11:04:45 +0000 (0:00:00.217)       0:00:00.609 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Set a fact for the temporary directory] ********************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.210)       0:00:00.819 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Verify all installed RPM packages] *************************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.032)       0:00:00.851 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Locate top level directories to check for .shosts] *********************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.025)       0:00:00.876 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for .shosts or shosts.equiv files] *******************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.024)       0:00:00.901 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Get user data for all users on the system] *****************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.024)       0:00:00.926 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Get user data for all interactive users on the system] *****************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.248)       0:00:01.175 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Install EPEL repository] ***********************************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.120)       0:00:01.295 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Add packages based on STIG requirements] *******************************************************************************************
+Wednesday 07 April 2021  11:04:46 +0000 (0:00:00.026)       0:00:01.322 ******* 
+changed: [mon1.local] => (item=present)
+[WARNING]: Updating cache and auto-installing missing dependency: python-apt
+
+TASK [ansible-hardening : Remove packages based on STIG requirements] ****************************************************************************************
+Wednesday 07 April 2021  11:05:02 +0000 (0:00:16.197)       0:00:17.520 ******* 
+ok: [mon1.local] => (item=absent)
+
+TASK [ansible-hardening : include_tasks] *********************************************************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.489)       0:00:18.009 ******* 
+included: /home/ceph-admin/ceph-stig/ansible-hardening/tasks/rhel7stig/apt.yml for mon1.local
+
+TASK [ansible-hardening : Ensure debsums is installed] *******************************************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.141)       0:00:18.151 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Gather debsums report] *************************************************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.025)       0:00:18.176 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71855 - Get files with invalid checksums (apt)] **********************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.024)       0:00:18.201 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71855 - Create comma-separated list] *********************************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.022)       0:00:18.224 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71855 - The cryptographic hash of system files and commands must match vendor values (apt)] **************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.023)       0:00:18.247 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Search for AllowUnauthenticated in /etc/apt/apt.conf.d/] ***************************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.024)       0:00:18.272 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71977 - Package management tool must verify authenticity of packages] ************************************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.125)       0:00:18.397 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71979 - Package management tool must verify authenticity of locally-installed packages] ******************************************
+Wednesday 07 April 2021  11:05:03 +0000 (0:00:00.031)       0:00:18.429 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : V-71987 - Clean requirements/dependencies when removing packages (dpkg)] ***********************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.224)       0:00:18.653 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Enable automatic package updates (apt)] ********************************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.025)       0:00:18.679 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if /etc/security/pwquality.conf exists] **************************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.027)       0:00:18.707 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Set password quality requirements] *************************************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.134)       0:00:18.842 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Check for SHA512 password storage in PAM] ******************************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.239)       0:00:19.081 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Print warning if PAM is not using SHA512 for password storage] *********************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.129)       0:00:19.211 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Ensure libuser is storing passwords using SHA512] **********************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.028)       0:00:19.239 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Set minimum password lifetime limit to 24 hours for interactive accounts] **********************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.026)       0:00:19.266 ******* 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'nobody', 'gid': 65534, 'gecos': 'nobody', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 65534}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1000, 'name': 'vagrant'}, 'name': 'vagrant', 'gid': 1000, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/vagrant', 'uid': 1000}) 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 999, 'name': 'systemd-coredump'}, 'name': 'systemd-coredump', 'gid': 999, 'gecos': 'systemd Core Dumper', 'shadow': {'expire_days': -1, 'min_days': -1, 'last_changed': 18698, 'max_days': -1, 'warn_days': -1, 'inact_days': -1}, 'dir': '/', 'uid': 999}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1001, 'name': 'ceph-admin'}, 'name': 'ceph-admin', 'gid': 1001, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18698, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/ceph-admin', 'uid': 1001}) 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 64045, 'name': 'ceph'}, 'name': 'ceph', 'gid': 64045, 'gecos': 'Ceph storage service', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/ceph', 'uid': 64045}) 
+
+TASK [ansible-hardening : Set maximum password lifetime limit to 60 days for interactive accounts] ***********************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.070)       0:00:19.336 ******* 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'nobody', 'gid': 65534, 'gecos': 'nobody', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 65534}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1000, 'name': 'vagrant'}, 'name': 'vagrant', 'gid': 1000, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/vagrant', 'uid': 1000}) 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 999, 'name': 'systemd-coredump'}, 'name': 'systemd-coredump', 'gid': 999, 'gecos': 'systemd Core Dumper', 'shadow': {'expire_days': -1, 'min_days': -1, 'last_changed': 18698, 'max_days': -1, 'warn_days': -1, 'inact_days': -1}, 'dir': '/', 'uid': 999}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1001, 'name': 'ceph-admin'}, 'name': 'ceph-admin', 'gid': 1001, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18698, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/ceph-admin', 'uid': 1001}) 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 64045, 'name': 'ceph'}, 'name': 'ceph', 'gid': 64045, 'gecos': 'Ceph storage service', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/ceph', 'uid': 64045}) 
+
+TASK [ansible-hardening : Ensure that users cannot reuse one of their last 5 passwords] **********************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.070)       0:00:19.407 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Ensure accounts are disabled if the password expires] ******************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.023)       0:00:19.431 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Apply shadow-utils configurations] *************************************************************************************************
+Wednesday 07 April 2021  11:05:04 +0000 (0:00:00.023)       0:00:19.454 ******* 
+ok: [mon1.local] => (item={'parameter': 'ENCRYPT_METHOD', 'value': 'SHA512', 'stig_id': 'V-71921', 'ansible_os_family': 'all'})
+changed: [mon1.local] => (item={'parameter': 'PASS_MIN_DAYS', 'value': '', 'stig_id': 'V-71925', 'ansible_os_family': 'all'})
+changed: [mon1.local] => (item={'parameter': 'PASS_MAX_DAYS', 'value': '', 'stig_id': 'V-71929', 'ansible_os_family': 'all'})
+skipping: [mon1.local] => (item={'parameter': 'FAIL_DELAY', 'value': '4', 'stig_id': 'V-71951', 'ansible_os_family': 'RedHat'}) 
+changed: [mon1.local] => (item={'parameter': 'UMASK', 'value': '', 'stig_id': 'V-71995', 'ansible_os_family': 'all'})
+changed: [mon1.local] => (item={'parameter': 'CREATE_HOME', 'value': True, 'stig_id': 'V-72013', 'ansible_os_family': 'all'})
+
+TASK [ansible-hardening : Print warning for groups in /etc/passwd that are not in /etc/group] ****************************************************************
+Wednesday 07 April 2021  11:05:05 +0000 (0:00:00.579)       0:00:20.034 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Get all accounts with UID 0] *******************************************************************************************************
+Wednesday 07 April 2021  11:05:05 +0000 (0:00:00.033)       0:00:20.067 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Print warnings for non-root users with UID 0] **************************************************************************************
+Wednesday 07 April 2021  11:05:05 +0000 (0:00:00.121)       0:00:20.189 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Print warning for local interactive users without a home directory assigned] *******************************************************
+Wednesday 07 April 2021  11:05:05 +0000 (0:00:00.025)       0:00:20.214 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check each user to see if its home directory exists on the filesystem] *************************************************************
+Wednesday 07 April 2021  11:05:05 +0000 (0:00:00.030)       0:00:20.245 ******* 
+ok: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 0, 'name': 'root'}, 'name': 'root', 'gid': 0, 'gecos': 'root', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/root', 'uid': 0})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 1, 'name': 'daemon'}, 'name': 'daemon', 'gid': 1, 'gecos': 'daemon', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/usr/sbin', 'uid': 1})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 2, 'name': 'bin'}, 'name': 'bin', 'gid': 2, 'gecos': 'bin', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/bin', 'uid': 2})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 3, 'name': 'sys'}, 'name': 'sys', 'gid': 3, 'gecos': 'sys', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/dev', 'uid': 3})
+ok: [mon1.local] => (item={'shell': '/bin/sync', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'sync', 'gid': 65534, 'gecos': 'sync', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/bin', 'uid': 4})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 60, 'name': 'games'}, 'name': 'games', 'gid': 60, 'gecos': 'games', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/usr/games', 'uid': 5})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 12, 'name': 'man'}, 'name': 'man', 'gid': 12, 'gecos': 'man', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/cache/man', 'uid': 6})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 7, 'name': 'lp'}, 'name': 'lp', 'gid': 7, 'gecos': 'lp', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/spool/lpd', 'uid': 7})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 8, 'name': 'mail'}, 'name': 'mail', 'gid': 8, 'gecos': 'mail', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/mail', 'uid': 8})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 9, 'name': 'news'}, 'name': 'news', 'gid': 9, 'gecos': 'news', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/spool/news', 'uid': 9})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 10, 'name': 'uucp'}, 'name': 'uucp', 'gid': 10, 'gecos': 'uucp', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/spool/uucp', 'uid': 10})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 13, 'name': 'proxy'}, 'name': 'proxy', 'gid': 13, 'gecos': 'proxy', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/bin', 'uid': 13})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 33, 'name': 'www-data'}, 'name': 'www-data', 'gid': 33, 'gecos': 'www-data', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/www', 'uid': 33})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 34, 'name': 'backup'}, 'name': 'backup', 'gid': 34, 'gecos': 'backup', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/backups', 'uid': 34})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 38, 'name': 'list'}, 'name': 'list', 'gid': 38, 'gecos': 'Mailing List Manager', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/list', 'uid': 38})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 39, 'name': 'irc'}, 'name': 'irc', 'gid': 39, 'gecos': 'ircd', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/run/ircd', 'uid': 39})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 41, 'name': 'gnats'}, 'name': 'gnats', 'gid': 41, 'gecos': 'Gnats Bug-Reporting System (admin)', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/gnats', 'uid': 41})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'nobody', 'gid': 65534, 'gecos': 'nobody', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 65534})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': '_apt', 'gid': 65534, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 100})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 102, 'name': 'systemd-timesync'}, 'name': 'systemd-timesync', 'gid': 102, 'gecos': 'systemd Time Synchronization,,,', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/run/systemd', 'uid': 101})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 103, 'name': 'systemd-network'}, 'name': 'systemd-network', 'gid': 103, 'gecos': 'systemd Network Management,,,', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/run/systemd', 'uid': 102})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 104, 'name': 'systemd-resolve'}, 'name': 'systemd-resolve', 'gid': 104, 'gecos': 'systemd Resolver,,,', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/run/systemd', 'uid': 103})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'sshd', 'gid': 65534, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/run/sshd', 'uid': 104})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 111, 'name': 'messagebus'}, 'name': 'messagebus', 'gid': 111, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 105})
+ok: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1000, 'name': 'vagrant'}, 'name': 'vagrant', 'gid': 1000, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/vagrant', 'uid': 1000})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 999, 'name': 'systemd-coredump'}, 'name': 'systemd-coredump', 'gid': 999, 'gecos': 'systemd Core Dumper', 'shadow': {'expire_days': -1, 'min_days': -1, 'last_changed': 18698, 'max_days': -1, 'warn_days': -1, 'inact_days': -1}, 'dir': '/', 'uid': 999})
+ok: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1001, 'name': 'ceph-admin'}, 'name': 'ceph-admin', 'gid': 1001, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18698, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/ceph-admin', 'uid': 1001})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 112, 'name': '_chrony'}, 'name': '_chrony', 'gid': 112, 'gecos': 'Chrony daemon,,,', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/chrony', 'uid': 106})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 64045, 'name': 'ceph'}, 'name': 'ceph', 'gid': 64045, 'gecos': 'Ceph storage service', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/ceph', 'uid': 64045})
+ok: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 114, 'name': 'uuidd'}, 'name': 'uuidd', 'gid': 114, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/run/uuidd', 'uid': 107})
+
+TASK [ansible-hardening : Print warning for users with an assigned home directory that does not exist] *******************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:03.391)       0:00:23.636 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    These users have a home directory assigned, but the directory does not exist:
+    lp (/var/spool/lpd does not exist)
+    news (/var/spool/news does not exist)
+    uucp (/var/spool/uucp does not exist)
+    www-data (/var/www does not exist)
+    list (/var/list does not exist)
+    irc (/var/run/ircd does not exist)
+    gnats (/var/lib/gnats does not exist)
+    nobody (/nonexistent does not exist)
+    _apt (/nonexistent does not exist)
+    messagebus (/nonexistent does not exist)
+
+TASK [ansible-hardening : Use pwquality when passwords are changed or created] *******************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.040)       0:00:23.677 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Verify that AIDE configuration directory exists] ***********************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.027)       0:00:23.704 ******* 
+skipping: [mon1.local] => (item=/etc/aide/aide.conf.d) 
+skipping: [mon1.local] => (item=/etc/aide.conf) 
+
+TASK [ansible-hardening : Exclude certain directories from AIDE] *********************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.033)       0:00:23.737 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Configure AIDE to verify additional properties (Ubuntu)] ***************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.026)       0:00:23.764 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Configure AIDE to verify additional properties (SUSE)] *****************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.025)       0:00:23.790 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check to see if AIDE database is already in place] *********************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.024)       0:00:23.815 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Initialize AIDE (this will take a few minutes)] ************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.024)       0:00:23.839 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Move AIDE database into place] *****************************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.023)       0:00:23.863 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Create AIDE cron job] **************************************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.027)       0:00:23.890 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Verify that auditd.conf exists] ****************************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.024)       0:00:23.915 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Verify that audisp-remote.conf exists] *********************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.129)       0:00:24.045 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72083 - The operating system must off-load audit records onto a different system or media from the system being audited] *********
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.134)       0:00:24.180 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72085 - The operating system must encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited] ***
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.030)       0:00:24.211 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Get valid system architectures for audit rules] ************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.025)       0:00:24.236 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Remove system default audit.rules file] ********************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.030)       0:00:24.266 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Remove old RHEL 6 audit rules file] ************************************************************************************************
+Wednesday 07 April 2021  11:05:09 +0000 (0:00:00.279)       0:00:24.546 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Deploy rules for auditd based on STIG requirements] ********************************************************************************
+Wednesday 07 April 2021  11:05:10 +0000 (0:00:00.129)       0:00:24.675 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Adjust auditd/audispd configurations] **********************************************************************************************
+Wednesday 07 April 2021  11:05:10 +0000 (0:00:00.492)       0:00:25.168 ******* 
+changed: [mon1.local] => (item={'parameter': 'disk_full_action', 'value': 'syslog', 'config': '/etc/audisp/audisp-remote.conf'})
+changed: [mon1.local] => (item={'parameter': 'network_failure_action', 'value': 'syslog', 'config': '/etc/audisp/audisp-remote.conf'})
+changed: [mon1.local] => (item={'parameter': 'space_left', 'value': '4661', 'config': '/etc/audit/auditd.conf'})
+changed: [mon1.local] => (item={'parameter': 'space_left_action', 'value': 'email', 'config': '/etc/audit/auditd.conf'})
+changed: [mon1.local] => (item={'parameter': 'action_mail_acct', 'value': 'ceph-admin', 'config': '/etc/audit/auditd.conf'})
+
+TASK [ansible-hardening : Ensure auditd is running and enabled at boot time] *********************************************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.586)       0:00:25.754 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Set pam_faildelay configuration on Ubuntu] *****************************************************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.438)       0:00:26.192 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Prevent users with blank or null passwords from authenticating (Debian/Ubuntu)] ****************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.135)       0:00:26.327 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Prevent users with blank or null passwords from authenticating (Red Hat)] **********************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.144)       0:00:26.472 ******* 
+skipping: [mon1.local] => (item=auth) 
+skipping: [mon1.local] => (item=password) 
+
+TASK [ansible-hardening : Prevent users with blank or null passwords from authenticating (SUSE)] *************************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.038)       0:00:26.510 ******* 
+skipping: [mon1.local] => (item=/etc/pam.d/common-auth) 
+skipping: [mon1.local] => (item=/etc/pam.d/common-password) 
+
+TASK [ansible-hardening : Lock accounts after three failed login attempts a 15 minute period] ****************************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.037)       0:00:26.548 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for 'nopasswd' in sudoers files] *********************************************************************************************
+Wednesday 07 April 2021  11:05:11 +0000 (0:00:00.025)       0:00:26.573 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71947 - Users must provide a password for privilege escalation.] *****************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.129)       0:00:26.703 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    The 'NOPASSWD' directive was found in the sudoers configuration files. Remove the directive to ensure that all users must provide a password to run commands as the root user.
+
+TASK [ansible-hardening : Check for '!authenticate' in sudoers files] ****************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.037)       0:00:26.740 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71949 - Users must re-authenticate for privilege escalation.] ********************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.121)       0:00:26.862 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if sssd.conf exists] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.032)       0:00:26.895 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check if GRUB2 custom file exists] *************************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.116)       0:00:27.012 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Define password options for grub] **************************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.134)       0:00:27.146 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Set CLASS for grub file] ***********************************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.029)       0:00:27.176 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72217 - The operating system must limit the number of concurrent sessions to 10 for all accounts and/or account types.] **********
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.028)       0:00:27.204 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for pam_lastlog in PAM configuration] ****************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.230 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72275 - Display date/time of last logon after logon] *****************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.126)       0:00:27.356 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Ensure .shosts find has finished] **************************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.030)       0:00:27.387 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Remove .shosts or shosts.equiv files] **********************************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.413 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71849 - Get packages with incorrect file permissions or ownership] ***************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.439 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71849 - Reset file permissions/ownership to vendor values] ***********************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.027)       0:00:27.466 ******* 
+
+TASK [ansible-hardening : Search for files/directories with an invalid owner] ********************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.492 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72007 - All files and directories must have a valid owner.] **********************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.517 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Search for files/directories with an invalid group owner] **************************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.025)       0:00:27.543 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72009 - All files and directories must have a valid group owner.] ****************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.026)       0:00:27.570 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Set proper owner, group owner, and permissions on home directories] ****************************************************************
+Wednesday 07 April 2021  11:05:12 +0000 (0:00:00.026)       0:00:27.597 ******* 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 65534, 'name': 'nogroup'}, 'name': 'nobody', 'gid': 65534, 'gecos': 'nobody', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/nonexistent', 'uid': 65534}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1000, 'name': 'vagrant'}, 'name': 'vagrant', 'gid': 1000, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18392, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/vagrant', 'uid': 1000}) 
+skipping: [mon1.local] => (item={'shell': '/bin/bash', 'group': {'passwd': 'x', 'gid': 1001, 'name': 'ceph-admin'}, 'name': 'ceph-admin', 'gid': 1001, 'gecos': '', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18698, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/home/ceph-admin', 'uid': 1001}) 
+skipping: [mon1.local] => (item={'shell': '/usr/sbin/nologin', 'group': {'passwd': 'x', 'gid': 64045, 'name': 'ceph'}, 'name': 'ceph', 'gid': 64045, 'gecos': 'Ceph storage service', 'shadow': {'expire_days': -1, 'min_days': 0, 'last_changed': 18712, 'max_days': 99999, 'warn_days': 7, 'inact_days': -1}, 'dir': '/var/lib/ceph', 'uid': 64045}) 
+
+TASK [ansible-hardening : Find all world-writable directories] ***********************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.062)       0:00:27.660 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72047 - All world-writable directories must be group-owned by root, sys, bin, or an application group.] **************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.024)       0:00:27.684 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if /etc/cron.allow exists] ***************************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.029)       0:00:27.714 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Set owner/group owner on /etc/cron.allow] ******************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.128)       0:00:27.843 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if gdm is installed and configured] ******************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.036)       0:00:27.880 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71953 - The operating system must not allow an unattended or automatic logon to the system via a graphical user interface] *******
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.117)       0:00:27.997 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71955 - The operating system must not allow guest logon to the system.] **********************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.029)       0:00:28.027 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for dconf profiles] **********************************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.024)       0:00:28.052 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Create a user profile in dconf] ****************************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.118)       0:00:28.170 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Create dconf directories] **********************************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.027)       0:00:28.198 ******* 
+skipping: [mon1.local] => (item=/etc/dconf/db/local.d/) 
+skipping: [mon1.local] => (item=/etc/dconf/db/local.d/locks) 
+skipping: [mon1.local] => (item=/etc/dconf/db/gdm.d/) 
+
+TASK [ansible-hardening : Configure graphical session locking] ***********************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.045)       0:00:28.243 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Prevent users from changing graphical session locking configurations] **************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.027)       0:00:28.270 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Create a GDM profile for displaying a login banner] ********************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.028)       0:00:28.298 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Create a GDM keyfile for machine-wide settings] ************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.027)       0:00:28.326 ******* 
+skipping: [mon1.local] => (item=/etc/dconf/db/gdm.d/01-banner-message) 
+skipping: [mon1.local] => (item=/etc/dconf/db/local.d/01-banner-message) 
+
+TASK [ansible-hardening : V-71983 - USB mass storage must be disabled.] **************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.036)       0:00:28.363 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Set sysctl configurations] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:13 +0000 (0:00:00.142)       0:00:28.505 ******* 
+changed: [mon1.local] => (item={'name': 'net.ipv4.conf.all.accept_source_route', 'value': 0, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'net.ipv4.conf.default.accept_source_route', 'value': 0, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'net.ipv4.icmp_echo_ignore_broadcasts', 'value': 1, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'net.ipv4.conf.all.send_redirects', 'value': 0, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'net.ipv4.conf.default.send_redirects', 'value': 0, 'enabled': True})
+skipping: [mon1.local] => (item={'name': 'net.ipv4.ip_forward', 'value': 0, 'enabled': False}) 
+changed: [mon1.local] => (item={'name': 'net.ipv6.conf.all.accept_source_route', 'value': 0, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'net.ipv4.conf.default.accept_redirects', 'value': 0, 'enabled': True})
+changed: [mon1.local] => (item={'name': 'kernel.randomize_va_space', 'value': 2, 'enabled': True})
+skipping: [mon1.local] => (item={'name': 'net.ipv6.conf.all.disable_ipv6', 'value': 1, 'enabled': False}) 
+
+TASK [ansible-hardening : Check kdump service] ***************************************************************************************************************
+Wednesday 07 April 2021  11:05:14 +0000 (0:00:01.104)       0:00:29.610 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72057 - Kernel core dumps must be disabled unless needed.] ***********************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.134)       0:00:29.744 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if FIPS is enabled] **********************************************************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.030)       0:00:29.775 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Print a warning if FIPS isn't enabled] *********************************************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.025)       0:00:29.801 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-77821 - Datagram Congestion Control Protocol (DCCP) kernel module must be disabled] **********************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.024)       0:00:29.825 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Check apparmor_status output] ******************************************************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.281)       0:00:30.107 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check if apparmor is running] ******************************************************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.231)       0:00:30.339 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Ensure AppArmor is enabled at boot time] *******************************************************************************************
+Wednesday 07 April 2021  11:05:15 +0000 (0:00:00.147)       0:00:30.487 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Ensure AppArmor is running] ********************************************************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.200)       0:00:30.688 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Ensure SELinux is in enforcing mode on the next reboot] ****************************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.213)       0:00:30.901 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Relabel files on next boot if SELinux mode changed] ********************************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.026)       0:00:30.928 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for unlabeled device files] **************************************************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.025)       0:00:30.953 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72039 - All system device files must be correctly labeled to prevent unauthorized modification.] *********************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.025)       0:00:30.979 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check autofs service] **************************************************************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.026)       0:00:31.005 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71985 - File system automounter must be disabled unless required.] ***************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.127)       0:00:31.133 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-71993 - The x86 Ctrl-Alt-Delete key sequence must be disabled] *******************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.026)       0:00:31.159 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-71993 - The x86 Ctrl-Alt-Delete key sequence must be disabled] *******************************************************************
+Wednesday 07 April 2021  11:05:16 +0000 (0:00:00.195)       0:00:31.355 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Check for /home on mounted filesystem] *********************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.552)       0:00:31.907 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    The STIG requires that /home is on its own filesystem, but this system
+    does not appear to be following the requirement.
+
+TASK [ansible-hardening : Check for /var on mounted filesystem] **********************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.034)       0:00:31.942 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    The STIG requires that /var is on its own filesystem, but this system
+    does not appear to be following the requirement.
+
+TASK [ansible-hardening : Check for /var/log/audit on mounted filesystem] ************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.031)       0:00:31.974 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    The STIG requires that /var/log/audit is on its own filesystem, but this system
+    does not appear to be following the requirement.
+
+TASK [ansible-hardening : Check for /tmp on mounted filesystem] **********************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.030)       0:00:32.004 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    The STIG requires that /tmp is on its own filesystem, but this system
+    does not appear to be following the requirement.
+
+TASK [ansible-hardening : Check if syslog output is being sent to another server] ****************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.030)       0:00:32.034 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72209 - The system must send rsyslog output to a log aggregation server.] ********************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.130)       0:00:32.164 ******* 
+ok: [mon1.local] => 
+  msg: Output from syslog must be sent to another server.
+
+TASK [ansible-hardening : Check if ClamAV is installed] ******************************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.034)       0:00:32.199 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Remove 'Example' line from ClamAV configuration files] *****************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.117)       0:00:32.317 ******* 
+skipping: [mon1.local] => (item=/etc/freshclam.conf) 
+skipping: [mon1.local] => (item=/etc/clamd.d/scan.conf) 
+
+TASK [ansible-hardening : Set ClamAV server type as socket] **************************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.037)       0:00:32.354 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Allow automatic freshclam updates] *************************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.024)       0:00:32.378 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check if ClamAV update process is already running] *********************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.025)       0:00:32.403 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Update ClamAV database] ************************************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.134)       0:00:32.538 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Ensure ClamAV is running] **********************************************************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.027)       0:00:32.565 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Remove old config block for V-72223 from openstack-ansible-security] ***************************************************************
+Wednesday 07 April 2021  11:05:17 +0000 (0:00:00.026)       0:00:32.592 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72223 - Set 10 minute timeout on communication sessions] *************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.118)       0:00:32.711 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Start and enable chrony] ***********************************************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.123)       0:00:32.834 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check if chrony configuration file exists] *****************************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.191)       0:00:33.026 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72269 - Synchronize system clock (configuration file)] ***************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.144)       0:00:33.171 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Check firewalld status] ************************************************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.317)       0:00:33.488 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Ensure firewalld is running and enabled] *******************************************************************************************
+Wednesday 07 April 2021  11:05:18 +0000 (0:00:00.130)       0:00:33.618 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Limit new TCP connections to 25/minute and allow bursting to 100] ******************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.031)       0:00:33.650 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Count nameserver entries in /etc/resolv.conf] **************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.031)       0:00:33.681 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72281 - For systems using DNS resolution, at least two name servers must be configured.] *****************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.124)       0:00:33.806 ******* 
+ok: [mon1.local] => 
+  msg: |-
+    Two or more nameservers must be configured in /etc/resolv.conf.
+    Nameservers found: 1
+
+TASK [ansible-hardening : Check for interfaces in promiscuous mode] ******************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.036)       0:00:33.842 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72295 - Network interfaces must not be in promiscuous mode.] *********************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.124)       0:00:33.966 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for postfix configuration file] **********************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.027)       0:00:33.993 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72297 - Prevent unrestricted mail relaying] **************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.118)       0:00:34.112 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check for TFTP server configuration file] ******************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.027)       0:00:34.139 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Check TFTP configuration mode] *****************************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.119)       0:00:34.259 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : V-72305 - TFTP must be configured to operate in secure mode] ***********************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.026)       0:00:34.286 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Check to see if snmpd config contains public/private] ******************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.024)       0:00:34.310 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : V-72313 - Change SNMP community strings from default.] *****************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.126)       0:00:34.436 ******* 
+skipping: [mon1.local]
+
+TASK [ansible-hardening : Copy login warning banner] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:19 +0000 (0:00:00.030)       0:00:34.467 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Adjust ssh server configuration based on STIG requirements] ************************************************************************
+Wednesday 07 April 2021  11:05:20 +0000 (0:00:00.293)       0:00:34.760 ******* 
+changed: [mon1.local]
+
+TASK [ansible-hardening : Ensure sshd is enabled at boot time] ***********************************************************************************************
+Wednesday 07 April 2021  11:05:20 +0000 (0:00:00.167)       0:00:34.928 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Determine existing public ssh host keys] *******************************************************************************************
+Wednesday 07 April 2021  11:05:20 +0000 (0:00:00.188)       0:00:35.116 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Public host key files must have mode 0644 or less] *********************************************************************************
+Wednesday 07 April 2021  11:05:20 +0000 (0:00:00.124)       0:00:35.240 ******* 
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_ecdsa_key.pub)
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_ed25519_key.pub)
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_rsa_key.pub)
+
+TASK [ansible-hardening : Determine existing private ssh host keys] ******************************************************************************************
+Wednesday 07 April 2021  11:05:20 +0000 (0:00:00.345)       0:00:35.585 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : Private host key files must have mode 0600 or less] ********************************************************************************
+Wednesday 07 April 2021  11:05:21 +0000 (0:00:00.121)       0:00:35.707 ******* 
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_ecdsa_key)
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_ed25519_key)
+ok: [mon1.local] => (item=/etc/ssh/ssh_host_rsa_key)
+
+TASK [ansible-hardening : Remove the temporary directory] ****************************************************************************************************
+Wednesday 07 April 2021  11:05:21 +0000 (0:00:00.344)       0:00:36.051 ******* 
+ok: [mon1.local]
+
+TASK [ansible-hardening : include_tasks] *********************************************************************************************************************
+Wednesday 07 April 2021  11:05:21 +0000 (0:00:00.134)       0:00:36.186 ******* 
+skipping: [mon1.local]
+
+RUNNING HANDLER [ansible-hardening : restart auditd] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:21 +0000 (0:00:00.022)       0:00:36.209 ******* 
+changed: [mon1.local]
+
+RUNNING HANDLER [ansible-hardening : restart chrony] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:21 +0000 (0:00:00.204)       0:00:36.414 ******* 
+changed: [mon1.local]
+
+RUNNING HANDLER [ansible-hardening : restart ssh] ************************************************************************************************************
+Wednesday 07 April 2021  11:05:22 +0000 (0:00:00.237)       0:00:36.651 ******* 
+changed: [mon1.local]
+
+RUNNING HANDLER [ansible-hardening : generate auditd rules] **************************************************************************************************
+Wednesday 07 April 2021  11:05:22 +0000 (0:00:00.233)       0:00:36.885 ******* 
+changed: [mon1.local]
+
+RUNNING HANDLER [ansible-hardening : restart auditd] *********************************************************************************************************
+Wednesday 07 April 2021  11:05:22 +0000 (0:00:00.150)       0:00:37.036 ******* 
+changed: [mon1.local]
+
+PLAY RECAP ***************************************************************************************************************************************************
+mon1.local                 : ok=84   changed=23   unreachable=0    failed=0    skipped=81   rescued=0    ignored=0   
+
+Wednesday 07 April 2021  11:05:22 +0000 (0:00:00.195)       0:00:37.231 ******* 
+=============================================================================== 
+ansible-hardening : Add packages based on STIG requirements ------------------------------------------------------------------------------------------ 16.20s
+ansible-hardening : Check each user to see if its home directory exists on the filesystem ------------------------------------------------------------- 3.39s
+ansible-hardening : Set sysctl configurations --------------------------------------------------------------------------------------------------------- 1.10s
+ansible-hardening : Adjust auditd/audispd configurations ---------------------------------------------------------------------------------------------- 0.59s
+ansible-hardening : Apply shadow-utils configurations ------------------------------------------------------------------------------------------------- 0.58s
+ansible-hardening : V-71993 - The x86 Ctrl-Alt-Delete key sequence must be disabled ------------------------------------------------------------------- 0.55s
+ansible-hardening : Deploy rules for auditd based on STIG requirements -------------------------------------------------------------------------------- 0.49s
+ansible-hardening : Remove packages based on STIG requirements ---------------------------------------------------------------------------------------- 0.49s
+ansible-hardening : Ensure auditd is running and enabled at boot time --------------------------------------------------------------------------------- 0.44s
+ansible-hardening : Public host key files must have mode 0644 or less --------------------------------------------------------------------------------- 0.35s
+ansible-hardening : Private host key files must have mode 0600 or less -------------------------------------------------------------------------------- 0.34s
+ansible-hardening : V-72269 - Synchronize system clock (configuration file) --------------------------------------------------------------------------- 0.32s
+ansible-hardening : Copy login warning banner --------------------------------------------------------------------------------------------------------- 0.29s
+ansible-hardening : V-77821 - Datagram Congestion Control Protocol (DCCP) kernel module must be disabled ---------------------------------------------- 0.28s
+ansible-hardening : Remove system default audit.rules file -------------------------------------------------------------------------------------------- 0.28s
+ansible-hardening : Get user data for all users on the system ----------------------------------------------------------------------------------------- 0.25s
+ansible-hardening : Set password quality requirements ------------------------------------------------------------------------------------------------- 0.24s
+ansible-hardening : restart chrony -------------------------------------------------------------------------------------------------------------------- 0.24s
+ansible-hardening : restart ssh ----------------------------------------------------------------------------------------------------------------------- 0.23s
+ansible-hardening : Check apparmor_status output ------------------------------------------------------------------------------------------------------ 0.23s
+ceph-admin@ansible:~/ceph-stig$ 
+ceph-admin@ansible:~/ceph-stig$ 
+ceph-admin@ansible:~/ceph-stig$ ssh mon1
+Linux mon1 4.19.0-16-amd64 #1 SMP Debian 4.19.181-1 (2021-03-19) x86_64
+You are accessing a U.S. Government (USG) Information System (IS) that is
+provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent
+to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for
+purposes including, but not limited to, penetration testing, COMSEC monitoring,
+network operations and defense, personnel misconduct (PM), law enforcement
+(LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject
+to routine monitoring, interception, and search, and may be disclosed or used
+for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls)
+to protect USG interests--not for your personal benefit or privacy.
+
+-notwithstanding the above, using this IS does not constitute consent to PM, LE
+or CI investigative searching or monitoring of the content of privileged
+communications, or work product, related to personal representation or services
+by attorneys, psychotherapists, or clergy, and their assistants. Such
+communications and work product are private and confidential. See User
+Agreement for details.
+Last login: Tue Apr  6 11:14:54 2021 from 192.168.121.17
+ceph-admin@mon1:~$ exit
+
